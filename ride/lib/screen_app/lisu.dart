@@ -4,7 +4,7 @@ class LogSign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.grey,
+      color: Colors.white,
       child: Container(
         margin: EdgeInsets.only(top: 100.0),
         child: Column(
@@ -33,7 +33,7 @@ class LoginButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
             color: Colors.red,
             child: GestureDetector(
-                onTap: () {},
+                onTap: () {Navigator.of(context).pushNamed("/LogInPage");},
                 child: Center(
                     child: Text("LOG IN",
                         style: TextStyle(
@@ -53,7 +53,7 @@ class SignUpButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
             color: Colors.black,
             child: GestureDetector(
-                onTap: () {},
+                onTap: () {Navigator.of(context).pushNamed("/SignUpPage");},
                 child: Center(
                     child: Text("SIGN UP",
                         style: TextStyle(

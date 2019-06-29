@@ -25,20 +25,24 @@ class _LogInPageState extends State<LogInPage> {
                   focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.red))),
             ),
-            TextField(
-              decoration: InputDecoration(
-                  labelText: "Password",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red))),
-              obscureText: true,
+            Container(
+              margin: EdgeInsets.only(top:20.0),
+              child: TextField(
+                decoration: InputDecoration(
+                    labelText: "Password",
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red))),
+                obscureText: true,
+              ),
             ),
             Container(
-              height:40.0,
-              margin: EdgeInsets.only(top:20.0),
+                height: 40.0,
+                width: 150.0,
+                margin: EdgeInsets.only(top: 20.0),
                 child: Material(
                     borderRadius: BorderRadius.circular(20.0),
                     color: Colors.red,
