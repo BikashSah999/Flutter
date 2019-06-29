@@ -3,46 +3,62 @@ import "package:flutter/material.dart";
 class LogSign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Material(
-        color: Colors.white,
-        child: Container(
-          margin: EdgeInsets.only(top: 100.0),
+    return Material(
+      color: Colors.grey,
+      child: Container(
+        margin: EdgeInsets.only(top: 100.0),
         child: Column(
           children: <Widget>[
-            Image.asset('images/logo.png',height:150.0,width:300.0,alignment:Alignment.center),
+            Image.asset('images/logo.png',
+                height: 150.0, width: 300.0, alignment: Alignment.center),
             LoginButton(),
-            SignUpButton(),
+            Container(
+              margin: EdgeInsets.only(top: 20.0),
+              child: SignUpButton(),
+            ),
           ],
-        ),
         ),
       ),
     );
   }
 }
 
-class LoginButton extends StatelessWidget{
+class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: RaisedButton(
-        color: Colors.red,
-        child: Text("Log In"),
-        onPressed:null,
-      )
-    );
+        height: 40.0,
+        width:250.0,
+        child: Material(
+            borderRadius: BorderRadius.circular(20.0),
+            color: Colors.red,
+            child: GestureDetector(
+                onTap: () {},
+                child: Center(
+                    child: Text("LOG IN",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ))))));
   }
 }
 
-class SignUpButton extends StatelessWidget{
+class SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: RaisedButton(
-          color: Colors.red,
-          child: Text("Sign Up"),
-          onPressed:null,
-        )
-    );
+        height: 40.0,
+        width:250.0,
+        child: Material(
+            borderRadius: BorderRadius.circular(20.0),
+            color: Colors.black,
+            child: GestureDetector(
+                onTap: () {},
+                child: Center(
+                    child: Text("SIGN UP",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ))))));
   }
 }
