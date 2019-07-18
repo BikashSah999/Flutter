@@ -8,8 +8,12 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="ride"
+        android:label="Saawari"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAzU_32ZsyH8BwKFRYpMr1joHcQleNHnHw "/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -6,14 +6,14 @@ class LogSign extends StatelessWidget {
     return Material(
       color: Colors.white,
       child: Container(
-        margin: EdgeInsets.only(top: 100.0),
+        margin: EdgeInsets.only(top: (MediaQuery.of(context).size.height/100)*20),
         child: Column(
           children: <Widget>[
             Image.asset('images/logo.png',
-                height: 150.0, width: 300.0, alignment: Alignment.center),
+                height: (MediaQuery.of(context).size.height/100)*25, width: (MediaQuery.of(context).size.width/100)*60, alignment: Alignment.center),
             LoginButton(),
             Container(
-              margin: EdgeInsets.only(top: 20.0),
+              margin: EdgeInsets.only(top: (MediaQuery.of(context).size.height/100)*2.5),
               child: SignUpButton(),
             ),
           ],
@@ -27,8 +27,8 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 40.0,
-        width:250.0,
+        height: (MediaQuery.of(context).size.height/100)*7,
+        width:(MediaQuery.of(context).size.width/100)*50,
         child: Material(
             borderRadius: BorderRadius.circular(20.0),
             color: Colors.red,
@@ -47,8 +47,8 @@ class SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 40.0,
-        width:250.0,
+           height: (MediaQuery.of(context).size.height/100)*7,
+        width:(MediaQuery.of(context).size.width/100)*50,
         child: Material(
             borderRadius: BorderRadius.circular(20.0),
             color: Colors.black,

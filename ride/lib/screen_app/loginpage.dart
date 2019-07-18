@@ -9,32 +9,56 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
-  TextEditingController _ctrlNumber = TextEditingController();
+   final _formKey = GlobalKey<FormState>();
+ TextEditingController _ctrlNumber = TextEditingController();
   TextEditingController _ctrlPassword = TextEditingController();
- _login() async {
-    var httpClient = new HttpClient();
-    var uri = new Uri.https('192.168.1.66', '/riders');
-    var request = await httpClient.getUrl(uri);
-    var response = await request.close();
-    var responseBody = await response.transform(utf8.decoder).join();
-    return responseBody;
-  }
+ String msg='';
+
+ _login() async{
+       String number = _ctrlNumber.text;
+       String password = _ctrlPassword.text;
+
+   try {
+     http.Response response = await http.get("http://192.168.1.66:3000/customers/login/usernum/$number/userpassword/$password");
+     var json = jsonDecode(response.body);
+   // print(json);
+     if(json.length!=0)
+     {
+        Navigator.of(context).pushReplacementNamed("/Profile");
+     }
+     else{
+       setState(()
+       {
+          msg="Login Fail";
+       });
+     }
+   }
+   catch(e)
+   {
+     print(e);
+   }
+ }
+
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        margin: EdgeInsets.only(top: 100.0),
+        margin: EdgeInsets.only(top: (MediaQuery.of(context).size.height/100)*20),
         child: Form(
-        child: Column(
+         key: _formKey,
+          child: Column(
           children: <Widget>[
             Image.asset('images/logo.png',
-                height: 150.0, width: 300.0, alignment: Alignment.center),
-            TextFormField(
+                height: (MediaQuery.of(context).size.height/100)*25, width: (MediaQuery.of(context).size.width/100)*60, alignment: Alignment.center),
+           Container(
+             margin: EdgeInsets.only(/*top:(MediaQuery.of(context).size.height/100)*1,*/left:(MediaQuery.of(context).size.height/100)*5,right:(MediaQuery.of(context).size.height/100)*5,), 
+            child:TextFormField(
               validator: (value) {
                 if(value.isEmpty){
                   return 'Please Enter The Number';
                 }
               },
+              keyboardType: TextInputType.number,
               controller: _ctrlNumber,
               decoration: InputDecoration(
                   labelText: "Email or Phone Number",
@@ -45,8 +69,9 @@ class _LogInPageState extends State<LogInPage> {
                   focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.red))),
             ),
+           ),
             Container(
-              margin: EdgeInsets.only(top:20.0),
+              margin: EdgeInsets.only(top:(MediaQuery.of(context).size.height/100)*1,left:(MediaQuery.of(context).size.height/100)*5,right:(MediaQuery.of(context).size.height/100)*5,),
               child: TextFormField(
                 validator: (value) {
                   if(value.isEmpty){
@@ -66,20 +91,31 @@ class _LogInPageState extends State<LogInPage> {
               ),
             ),
             Container(
-                height: 40.0,
-                width: 150.0,
-                margin: EdgeInsets.only(top: 20.0),
+                height: (MediaQuery.of(context).size.height/100)*7,
+                width: (MediaQuery.of(context).size.width/100)*40,
+                margin: EdgeInsets.only(top:(MediaQuery.of(context).size.height/100)*5),
                 child: Material(
                     borderRadius: BorderRadius.circular(20.0),
                     color: Colors.red,
                     child: GestureDetector(
-                        onTap: () => _login(),
+                        onTap: (){ 
+                          if (_formKey.currentState.validate()){
+                          _login();
+                          }
+                        },
                         child: Center(
                             child: Text("LOGIN",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                ))))))
+                                )))))),
+                      // Container(
+                      //   height: 40.0,
+                      //  width: 150.0,
+                      //  margin: EdgeInsets.only(top: 20.0),
+                      //  child: Text(msg,style:TextStyle(fontSize:20.0,color:Colors.red),
+                      // )
+                      // ),
           ],
         ),
         ),

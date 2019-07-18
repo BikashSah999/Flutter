@@ -1,4 +1,7 @@
-import "package:flutter/material.dart";
+ import "package:flutter/material.dart";
+ import 'dart:convert';
+ import 'dart:io';
+ import "package:http/http.dart" as http;
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -6,14 +9,42 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+    final _formKey = GlobalKey<FormState>();
+ TextEditingController _ctrlNumber = TextEditingController();
+ TextEditingController _ctrlFirstname = TextEditingController();
+ TextEditingController _ctrlLastname = TextEditingController();
+ TextEditingController _ctrlAddress = TextEditingController();
+ TextEditingController _ctrlGender = TextEditingController();
+ TextEditingController _ctrlEmail = TextEditingController();
+ TextEditingController _ctrlPassword = TextEditingController();
+
+Future<dynamic> _signup() async {
+
+  final response =await http.post("http://192.168.1.66:3000/customers/signup", body:{
+    "firstname":_ctrlFirstname.text,
+    "lastname":_ctrlLastname.text,
+    "address":_ctrlAddress.text,
+    "number":_ctrlNumber.text,
+    "email":_ctrlEmail.text,
+    "password":_ctrlPassword.text,
+  });
+  final responseJson = json.decode(response.body);
+  print(responseJson);
+  return response;
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
           margin: EdgeInsets.only(top: 20.0),
-          child: Column(
+            child: Form(
+              key: _formKey,
+              child: Column(
               children: <Widget>[
           TextField(
+            controller: _ctrlFirstname,
             decoration: InputDecoration(
                 labelText: "First Name",
                 labelStyle: TextStyle(
@@ -25,6 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           Container(
             child: TextField(
+              controller: _ctrlLastname,
               decoration: InputDecoration(
                   labelText: "Last Name",
                   labelStyle: TextStyle(
@@ -37,6 +69,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           Container(
             child: TextField(
+              controller: _ctrlEmail,
               decoration: InputDecoration(
                   labelText: "Email",
                   labelStyle: TextStyle(
@@ -49,6 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
                 Container(
                   child: TextField(
+                    controller: _ctrlPassword,
                     decoration: InputDecoration(
                         labelText: "Password",
                         labelStyle: TextStyle(
@@ -62,6 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Container(
                   child: TextField(
+                    controller: _ctrlAddress,
                     decoration: InputDecoration(
                         labelText: "Address",
                         labelStyle: TextStyle(
@@ -74,6 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Container(
                   child: TextField(
+                    controller: _ctrlNumber,
                     decoration: InputDecoration(
                         labelText: "Number",
                         labelStyle: TextStyle(
@@ -86,6 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Container(
                   child: TextField(
+                    controller: _ctrlGender,
                     decoration: InputDecoration(
                         labelText: "Gender",
                         labelStyle: TextStyle(
@@ -104,7 +141,9 @@ class _SignUpPageState extends State<SignUpPage> {
               borderRadius: BorderRadius.circular(20.0),
               color: Colors.red,
               child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    _signup();
+                  },
                   child: Center(
                       child: Text("SIGN UP",
                           style: TextStyle(
@@ -112,8 +151,11 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontWeight: FontWeight.bold,
                           ))))))
       ],
-    ),)
-    ,
+    ),
+    ),
+     ),
     );
   }
 }
+
+
