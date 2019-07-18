@@ -19,7 +19,7 @@ class _LogInPageState extends State<LogInPage> {
        String password = _ctrlPassword.text;
 
    try {
-     http.Response response = await http.get("http://192.168.1.66:3000/customers/login/usernum/$number/userpassword/$password");
+     http.Response response = await http.get("http://192.168.137.88:3000/customers/login/usernum/$number/userpassword/$password");
      var json = jsonDecode(response.body);
    // print(json);
      if(json.length!=0)

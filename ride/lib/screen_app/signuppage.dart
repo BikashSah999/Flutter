@@ -20,7 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
 Future<dynamic> _signup() async {
 
-  final response =await http.post("http://192.168.1.66:3000/customers/signup", body:{
+  final response =await http.post("http://192.168.137.88:3000/customers/signup", body:{
     "firstname":_ctrlFirstname.text,
     "lastname":_ctrlLastname.text,
     "address":_ctrlAddress.text,
